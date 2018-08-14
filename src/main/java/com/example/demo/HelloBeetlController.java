@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/home")
 public class HelloBeetlController {
 
     private static Logger logger = LoggerFactory.getLogger(HelloBeetlController.class);
@@ -46,6 +45,15 @@ public class HelloBeetlController {
         logger.info("add request");
         modelAndView.addObject("email", "apk2sf@163.com");
         modelAndView.setViewName("loupanchart");
+
+        return modelAndView;
+    }
+
+    @RequestMapping("/logout")
+    public ModelAndView logout() {
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("add");
 
         return modelAndView;
     }
