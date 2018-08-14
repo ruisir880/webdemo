@@ -51,10 +51,24 @@ public class HelloBeetlController {
 
     @RequestMapping("/logout")
     public ModelAndView logout() {
-
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("add");
+        return modelAndView;
+    }
 
+    @RequestMapping("/userList")
+    public ModelAndView userList() {
+        ModelAndView modelAndView = new ModelAndView();
+        User user = new User(1001,"ray","张三那","123456","test@qq.com");
+        modelAndView.addObject("user",user);
+        modelAndView.setViewName("userList");
+        return modelAndView;
+    }
+
+    @RequestMapping("/userEdit")
+    public ModelAndView userEdit() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("userAdd");
         return modelAndView;
     }
 

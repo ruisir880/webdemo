@@ -103,32 +103,20 @@
 
         /** 表单验证  **/
         function validateForm(){
-            if($("#fyXqName").val()==""){
-                art.dialog({icon:'error', title:'友情提示', drag:false, resize:false, content:'填写房源小区', ok:true,});
+            if($("#username").val()==""){
+                art.dialog({icon:'error', title:'友情提示', drag:false, resize:false, content:'用户名', ok:true,});
                 return false;
             }
-            if($("#fyDh").val()==""){
-                art.dialog({icon:'error', title:'友情提示', drag:false, resize:false, content:'填写房源栋号', ok:true,});
+            if($("#password").val()==""){
+                art.dialog({icon:'error', title:'友情提示', drag:false, resize:false, content:'密码', ok:true,});
                 return false;
             }
-            if($("#fyCh").val()==""){
-                art.dialog({icon:'error', title:'友情提示', drag:false, resize:false, content:'填写房源层号', ok:true,});
+            if($("#realName").val()==""){
+                art.dialog({icon:'error', title:'友情提示', drag:false, resize:false, content:'真实姓名', ok:true,});
                 return false;
             }
-            if($("#fyFh").val()==""){
-                art.dialog({icon:'error', title:'友情提示', drag:false, resize:false, content:'填写房源房号', ok:true,});
-                return false;
-            }
-            if($("#fyZongMj").val()==""){
-                art.dialog({icon:'error', title:'友情提示', drag:false, resize:false, content:'填写房源面积', ok:true,});
-                return false;
-            }
-            if($("#fyJizuMj").val()==""){
-                art.dialog({icon:'error', title:'友情提示', drag:false, resize:false, content:'填写计租面积', ok:true,});
-                return false;
-            }
-            if($("#fyZldz").val()==""){
-                art.dialog({icon:'error', title:'友情提示', drag:false, resize:false, content:'填写房源座落地址', ok:true,});
+            if($("#mobile").val()==""){
+                art.dialog({icon:'error', title:'友情提示', drag:false, resize:false, content:'电话号码', ok:true,});
                 return false;
             }
             return true;
@@ -136,11 +124,10 @@
     </script>
 </head>
 <body>
-<form id="submitForm" name="submitForm" action="/xngzf/archives/initFangyuan.action" method="post">
-    <input type="hidden" name="fyID" value="14458625716623" id="fyID"/>
+<form id="submitForm" name="submitForm" method="post">
     <div id="container">
         <div id="nav_links">
-            当前位置：基础数据&nbsp;>&nbsp;<span style="color: #1A5CC6;">房源编辑</span>
+            当前位置：基础数据&nbsp;>&nbsp;<span style="color: #1A5CC6;">用户编辑</span>
             <div id="page_close">
                 <a href="javascript:parent.$.fancybox.close();">
                     <img  src="${ctxPath}/images/common/page_close.png" width="20" height="20" style="vertical-align: text-top;"/>
@@ -148,64 +135,50 @@
             </div>
         </div>
         <div class="ui_content">
-            <table  cellspacing="0" cellpadding="0" width="100%" align="left" border="0">
+            <form id="addUser" action="">
+                <table  cellspacing="0" cellpadding="0" width="100%" align="left" border="0">
                 <tr>
-                    <td class="ui_text_rt" width="80">小区</td>
+                    <td class="ui_text_rt" width="80">用户名</td>
                     <td class="ui_text_lt">
-                        <select name="fangyuanEntity.fyXqCode" id="fyXq" class="ui_select01" onchange="getFyDhListByFyXqCode();">
-                            <option value="">--请选择--</option>
-                            <option value="6" selected="selected">瑞景河畔</option>
-                            <option value="77">蔚蓝小区</option>
-                            <option value="83">和盛园小区</option>
-                        </select>
+                        <input type="text" id="username" name="username"  class="ui_input_txt02"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="ui_text_rt" width="80">密码</td>
+                    <td class="ui_text_lt">
+                        <input type="password" id="password" name="password"  class="ui_input_txt02"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="ui_text_rt" width="80">真实姓名</td>
+                    <td class="ui_text_lt">
+                        <input type="text" id="realName" name="realName"  class="ui_input_txt02"/>
                     </td>
                 </tr>
 
                 <tr>
-                    <td class="ui_text_rt">座落</td>
+                    <td class="ui_text_rt" width="80">电话号码</td>
                     <td class="ui_text_lt">
-                        <input type="text" id="fyZldz" name="fangyuanEntity.fyZldz" value="瑞景河畔16号楼1-112" class="ui_input_txt02"/>
+                        <input type="text" id="mobile" name="mobile"  class="ui_input_txt02"/>
                     </td>
                 </tr>
+
                 <tr>
-                    <td class="ui_text_rt">位置</td>
+                    <td class="ui_text_rt" width="80">邮件地址</td>
                     <td class="ui_text_lt">
-                        <input type="text" id="fyPsdz" name="fangyuanEntity.fyPsdz" value="城中区" class="ui_input_txt02"/>
+                        <input type="text" id="email" name="email"  class="ui_input_txt02"/>
                     </td>
                 </tr>
-                <tr>
-                    <td class="ui_text_rt">性质</td>
-                    <td class="ui_text_lt">
-                        <select name="fangyuanEntity.zulinXingzhi" id="submitForm_fangyuanEntity_zulinXingzhi" class="ui_select01">
-                            <option value="">--请选择--</option>
-                            <option value="40" selected="selected">公租房</option>
-                            <option value="41">廉租房</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="ui_text_rt">状态</td>
-                    <td class="ui_text_lt">
-                        <select name="fangyuanEntity.fyStatus" id="submitForm_fangyuanEntity_fyStatus" class="ui_select01">
-                            <option value="">--请选择--</option>
-                            <option value="26">在建</option>
-                            <option value="25">建成待租</option>
-                            <option value="13" selected="selected">已配租</option>
-                            <option value="12">已租赁</option>
-                            <option value="24">腾退待租</option>
-                            <option value="23">欠费</option>
-                            <option value="27">其他</option>
-                        </select>
-                    </td>
-                </tr>
+
                 <tr>
                     <td>&nbsp;</td>
                     <td class="ui_text_lt">
-                        &nbsp;<input id="submitbutton" type="button" value="提交" class="ui_input_btn01"/>
+                        &nbsp;<input id="submitbutton" type="submit" value="提交" class="ui_input_btn01"/>
                         &nbsp;<input id="cancelbutton" type="button" value="取消" class="ui_input_btn01"/>
                     </td>
                 </tr>
             </table>
+            </form>
         </div>
     </div>
 </form>
