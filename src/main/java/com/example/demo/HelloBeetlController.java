@@ -3,8 +3,13 @@ package com.example.demo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class HelloBeetlController {
@@ -65,11 +70,54 @@ public class HelloBeetlController {
         return modelAndView;
     }
 
-    @RequestMapping("/userAdd")
+
+    @RequestMapping("/my")
     public ModelAndView userEdit() {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("userAdd");
+        modelAndView.setViewName("chart");
         return modelAndView;
+    }
+
+    @GetMapping("/checkTempChart")
+    @ResponseBody
+    public Person getPerson(Integer id) {
+         Person person = new Person();
+        person.setUsername("Ray");
+        List<Weight> weights= new ArrayList<>();
+        weights.add(new Weight(60, "5"));
+        weights.add(new Weight(61, "6"));
+        weights.add(new Weight(62, "7"));
+        person.setWeights(weights);
+
+        return person;
+    }
+
+    @GetMapping("/currentTemp")
+    @ResponseBody
+    public ModelAndView currentTemp(Integer id) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("currentTempChart");
+        return modelAndView;
+    }
+
+    @GetMapping("/tempInfoChart")
+    @ResponseBody
+    public ModelAndView tempInfoChart() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("tempInfoChart");
+        return modelAndView;
+    }
+
+    @GetMapping("/checkCurrentTemp")
+    @ResponseBody
+    public List<Transducer> checkCurrentTemp(Integer id) {
+        List<Transducer> transducers = new ArrayList<>();
+        transducers.add(new Transducer(1L,"1",22.3));
+        transducers.add(new Transducer(2L,"2",23.3));
+        transducers.add(new Transducer(3L,"3",30));
+        transducers.add(new Transducer(4L,"4",35));
+        transducers.add(new Transducer(5L,"5",12));
+        return transducers;
     }
 
 
