@@ -65,7 +65,7 @@ public class HelloBeetlController {
         return modelAndView;
     }
 
-    @RequestMapping("/userEdit")
+    @RequestMapping("/userAdd")
     public ModelAndView userEdit() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("userAdd");
