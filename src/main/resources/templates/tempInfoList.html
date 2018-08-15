@@ -12,45 +12,6 @@
     <script type="text/javascript"  src="${ctxPath}/scripts/artDialog/artDialog.js?skin=default"></script>
     <title>电力测温智能化管理</title>
     <script type="text/javascript">
-        $(document).ready(function(){
-            /** 新增   **/
-            $("#addBtn").fancybox({
-                'href'  : 'house_edit.html',
-                'width' : 733,
-                'height' : 530,
-                'type' : 'iframe',
-                'hideOnOverlayClick' : false,
-                'showCloseButton' : false,
-                'onClosed' : function() {
-                    window.location.href = 'house_list.html';
-                }
-            });
-
-            /** 导入  **/
-            $("#importBtn").fancybox({
-                'href'  : '/xngzf/archives/importFangyuan.action',
-                'width' : 633,
-                'height' : 260,
-                'type' : 'iframe',
-                'hideOnOverlayClick' : false,
-                'showCloseButton' : false,
-                'onClosed' : function() {
-                    window.location.href = 'house_list.html';
-                }
-            });
-
-            /**编辑   **/
-            $("a.edit").fancybox({
-                'width' : 733,
-                'height' : 530,
-                'type' : 'iframe',
-                'hideOnOverlayClick' : false,
-                'showCloseButton' : false,
-                'onClosed' : function() {
-                    window.location.href = 'house_list.html';
-                }
-            });
-        });
         /** 用户角色   **/
         var userRole = '';
 
@@ -60,52 +21,11 @@
         }
 
 
-        /** 删除 **/
-        function del(fyID){
-            // 非空判断
-            if(fyID == '') return;
-            if(confirm("您确定要删除吗？")){
-                $("#submitForm").attr("action", "/xngzf/archives/delFangyuan.action?fyID=" + fyID).submit();
-            }
-        }
-
-        /** 批量删除 **/
-        function batchDel(){
-            if($("input[name='IDCheck']:checked").size()<=0){
-                art.dialog({icon:'error', title:'友情提示', drag:false, resize:false, content:'至少选择一条', ok:true,});
-                return;
-            }
-            // 1）取出用户选中的checkbox放入字符串传给后台,form提交
-            var allIDCheck = "";
-            $("input[name='IDCheck']:checked").each(function(index, domEle){
-                bjText = $(domEle).parent("td").parent("tr").last().children("td").last().prev().text();
-// 			alert(bjText);
-                // 用户选择的checkbox, 过滤掉“已审核”的，记住哦
-                if($.trim(bjText)=="已审核"){
-// 				$(domEle).removeAttr("checked");
-                    $(domEle).parent("td").parent("tr").css({color:"red"});
-                    $("#resultInfo").html("已审核的是不允许您删除的，请联系管理员删除！！！");
-// 				return;
-                }else{
-                    allIDCheck += $(domEle).val() + ",";
-                }
-            });
-            // 截掉最后一个","
-            if(allIDCheck.length>0) {
-                allIDCheck = allIDCheck.substring(0, allIDCheck.length-1);
-                // 赋给隐藏域
-                $("#allIDCheck").val(allIDCheck);
-                if(confirm("您确定要批量删除这些记录吗？")){
-                    // 提交form
-                    $("#submitForm").attr("action", "/xngzf/archives/batchDelFangyuan.action").submit();
-                }
-            }
-        }
-
         /** 普通跳转 **/
         function jumpNormalPage(page){
             $("#submitForm").attr("action", "house_list.html?page=" + page).submit();
         }
+
 
         /** 输入页跳转 **/
         function jumpInputPage(totalPage){
@@ -130,17 +50,18 @@
     </style>
 </head>
 <body>
-<form id="submitForm" name="submitForm" action="" method="post">
+<form id="tempInfoForm" name="tempInfoForm" action="" method="post">
     <div id="container">
         <div class="ui_content">
             <div class="ui_text_indent">
                 <div id="box_border">
                     <div id="box_top">搜索</div>
                     <div id="box_center">
-                        用户名&nbsp;&nbsp;<input type="text" id="username" name="username" class="ui_input_txt02" />
-                        真实姓名&nbsp;&nbsp;<input type="text" id="realName" name="realName" class="ui_input_txt02" />
-                        电话号码&nbsp;&nbsp;<input type="text" id="mobile" name="mobile" class="ui_input_txt02" />
-
+                        全部&nbsp;&nbsp;<input type="checkbox" name="all" id="all" value=""/>
+                        无告警&nbsp;&nbsp;<input type="checkbox" name="noWarn" id="noWarn" value=""/>
+                        告警&nbsp;&nbsp;<input type="checkbox" name="warn" id="warn" value=""/>
+                        时间段：&nbsp;&nbsp;<input type="datetime-local" id="startTime" name="startTime" class="ui_input_txt02" />
+                        到&nbsp;&nbsp;<input type="datetime-local" id="endTime" name="endTime" class="ui_input_txt02" />
                     </div>
                     <div id="box_bottom">
                         <input type="button" value="查询" class="ui_input_btn01" onclick="search();" />

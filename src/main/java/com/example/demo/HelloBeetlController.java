@@ -100,6 +100,14 @@ public class HelloBeetlController {
         return modelAndView;
     }
 
+    @GetMapping("/tempInfoList")
+    @ResponseBody
+    public ModelAndView tempInfoList(Integer id) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("tempInfoList");
+        return modelAndView;
+    }
+
     @GetMapping("/tempInfoChart")
     @ResponseBody
     public ModelAndView tempInfoChart() {
