@@ -93,7 +93,6 @@ public class HelloBeetlController {
     }
 
     @GetMapping("/currentTemp")
-    @ResponseBody
     public ModelAndView currentTemp(Integer id) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("currentTempChart");
@@ -124,8 +123,22 @@ public class HelloBeetlController {
         transducers.add(new Transducer(2L,"2",23.3));
         transducers.add(new Transducer(3L,"3",30));
         transducers.add(new Transducer(4L,"4",35));
-        transducers.add(new Transducer(5L,"5",12));
+        transducers.add(new Transducer(5L, "5", 12));
         return transducers;
+    }
+
+    @GetMapping("/transducerInfoChart")
+    public ModelAndView transducerInfo() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("transducerInfoChart");
+        return modelAndView;
+    }
+
+    @GetMapping("/checkTransducerInfo")
+    @ResponseBody
+    public List<Transducer> checkTransducerInfo() {
+
+        return null;
     }
 
 
